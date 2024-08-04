@@ -1,3 +1,5 @@
+import traceback
+
 __all__ = ["Test"]
 
 """
@@ -16,7 +18,7 @@ class Test_Add(Test):
 
 if __name__ == "__main__":
     t1 = Test_Add()
-    t1.test()
+    t1.run()
     print(t1) Test 'Add' failed, add(1, 1) == 2 is suppposed to be true, but it is false
 """
 class Test:
@@ -44,5 +46,11 @@ class Test:
 
     def test(self) -> None:
         raise NotImplementedError()
+
+    def run(self) -> None:
+        try:
+            self.test()
+        except Exception as e:
+            self.error = f"Test '{self.test_name}' failed, {traceback.format_exc()} error"
 
 
