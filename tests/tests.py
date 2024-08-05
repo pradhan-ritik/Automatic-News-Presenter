@@ -12,13 +12,12 @@ class Test_Article(Test):
         super().__init__("Article Test")
 
     def test(self):
-        f = 1/0
         article = gn.Article("test", "test", "test")
         self.assert_true(article.body == "test")
         self.assert_true(article.title == "test")
         self.assert_true(article.link == "test")
         self.assert_true(article == gn.Article("test", "test", "test"))
-        self.assert_false(len(list(set([article, gn.Article("test", "test", "test")]))) == 2)
+        self.assert_false(len(list(set([article, gn.Article("test", "testetsetset", "test")]))) == 2)
 
 class Test_BBC(Test):
     def __init__(self) -> None:
