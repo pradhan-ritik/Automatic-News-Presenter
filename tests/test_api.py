@@ -1,4 +1,4 @@
-from ast import literal_eval
+import traceback
 
 __all__ = ["Test"]
 
@@ -18,7 +18,7 @@ class Test_Add(Test):
 
 if __name__ == "__main__":
     t1 = Test_Add()
-    t1.test()
+    t1.run()
     print(t1) Test 'Add' failed, add(1, 1) == 2 is suppposed to be true, but it is false
 """
 class Test:
@@ -36,15 +36,22 @@ class Test:
             if not expr:
                 self.error = f"Test '{self.test_name}' failed, test number {self.num_tests} is suppposed to be true, but it is false"
                 self.passing = False
+        self.num_tests += 1
 
     def assert_false(self, expr: bool) -> None:
         if self.passing:
             if expr:
                 self.error = f"Test '{self.test_name}' failed, test number {self.num_tests} is suppposed to be false, but it is true"
                 self.passing = False
-
+        self.num_tests += 1
 
     def test(self) -> None:
         raise NotImplementedError()
+
+    def run(self) -> None:
+        try:
+            self.test()
+        except Exception as e:
+            self.error = f"Test '{self.test_name}' failed, {traceback.format_exc()} error"
 
 
