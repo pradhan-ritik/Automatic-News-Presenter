@@ -36,6 +36,7 @@ class Test:
             if not expr:
                 self.error = f"Test '{self.test_name}' failed, test number {self.num_tests} is suppposed to be true, but it is false"
                 self.passing = False
+
         self.num_tests += 1
 
     def assert_false(self, expr: bool) -> None:
@@ -43,12 +44,14 @@ class Test:
             if expr:
                 self.error = f"Test '{self.test_name}' failed, test number {self.num_tests} is suppposed to be false, but it is true"
                 self.passing = False
+
         self.num_tests += 1
 
     def test(self) -> None:
         raise NotImplementedError()
 
     def run(self) -> None:
+        # make sure program keeps running in case of exception from test case
         try:
             self.test()
         except Exception as e:
