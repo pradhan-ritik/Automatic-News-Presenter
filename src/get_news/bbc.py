@@ -13,7 +13,9 @@ _GET_TEXT_FROM_DIV = compile(r"\>(.*?)\<")
 
 def from_bbc() -> list[Article]:
     news = set()
-    soup = BeautifulSoup(get(_WORLD_NEWS_LINK).content.decode(), "html.parser");
+    # load the website
+    soup = BeautifulSoup(get(_WORLD_NEWS_LINK).content.decode(), "html.parser")
+    # get the html containers for the articles
     media = soup.find_all("div", attrs={"data-testid": _TYPES_OF_CARDS[0]})
     media.extend(soup.find_all("div", attrs={"data-testid": _TYPES_OF_CARDS[1]}))
     media.extend(soup.find_all("div", attrs={"data-testid": _TYPES_OF_CARDS[2]}))
@@ -28,7 +30,7 @@ def from_bbc() -> list[Article]:
         if (not cur.link.startswith(_ARTICLE_LINK)) or cur in news:
             continue
         
-        # bs4 hates 
+        # bs4 doesn't work for me if I do nested soups for some reason
         article = get(cur.link).content.decode()
         text_blocks = _GET_DIV_TEXT.findall(article)
         for block in text_blocks:
