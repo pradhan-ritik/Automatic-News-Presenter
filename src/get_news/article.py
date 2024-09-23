@@ -15,3 +15,6 @@ class Article:
 
     def __ne__(self, other: "Article") -> bool:
         return not self.__eq__(other)
+    
+    def to_text(self):
+        return f"{self.title}:\n{self.body}"
