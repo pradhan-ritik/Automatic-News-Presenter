@@ -28,8 +28,12 @@ class Test_BBC(Test):
         articles = gn.from_bbc()
         # make sure we actually got the articles
         self.assert_true(articles)
-        for article in articles:
-            print(article)
+        # for article in articles:
+            # print(article)
+        print("Article")
+        print(articles[0])
+        print("Summarizing Article")
+        print(sn.summarize_article(articles[0]))
 
 if __name__ == "__main__":
     # running the test cases
