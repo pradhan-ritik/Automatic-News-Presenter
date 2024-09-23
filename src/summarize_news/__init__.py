@@ -1,0 +1,1 @@
+from .summarize_articles import summarize_article
